@@ -52,9 +52,9 @@ def getSinglePage_link(link):
     single_page_link = list()
 
     for i in ss:
-        print(i)
         try:
             a = i.find('a')
+            print(a.text)
             l = a['href']
             single_page_link.append(l)
         except:
