@@ -67,7 +67,8 @@ def getSinglePage_link(link):
 def getContent(link):
     r = requests.get(link, cookies=cookies, headers=headers)
     s = BeautifulSoup(r.text, 'lxml')
-    return s.body.text
+    ss = s.find('div', id='main-content')
+    return ss.text
 
 def DownLoadFromBoard(Board, page_size, filename):
     links = getPage_link(Board, page_size)
@@ -93,4 +94,4 @@ def DownLoadFromBoard(Board, page_size, filename):
                 continue
 
 if __name__ == "__main__":
-    DownLoadFromBoard('Gossiping', 1000000, 'data.txt')
+    l = 'https://www.ptt.cc/bbs/Gossiping/M.1507175602.A.B82.html'
