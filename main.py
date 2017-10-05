@@ -74,24 +74,33 @@ def DownLoadFromBoard(Board, page_size, filename):
     links = getPage_link(Board, page_size)
     page_links = list()
     
-    with open('LinkOf'+filename, 'w') as f:
+    with open(filename, 'w') as f:
         for link in links:
             l = getSinglePage_link(link)
             for i in l:
                 f.write(i+'\n')
                 f.flush()
-            page_links += l
 
 
-    with open(filename, 'w') as f:
-        for link in page_links:
-            print(link)
-            try:
-                s = getContent(link)
-                f.write(s)
-                f.flush()
-            except:
-                continue
+def DownLoadFromListOFLink(linkfile, docfile):
+    doc_fp = open(docfile, 'w')
+    link_fp = open(linkfile, 'r')
+    cnt = 0
+
+    for line in link_fp:
+        l = line.replace('\n', '')
+        cnt += 1
+        print("{}: {}".format(cnt, l))
+        try:
+            c = getContent(l)
+            doc_fp.write(c+'\n')
+            doc_fp.flush()
+        except:
+            continue
+
+    doc_fp.close()
+    link_fp.close()
 
 if __name__ == "__main__":
-    l = 'https://www.ptt.cc/bbs/Gossiping/M.1507175602.A.B82.html'
+    DownLoadFromListOFLink('LinkOfdata.txt', 'data.txt')
+            
