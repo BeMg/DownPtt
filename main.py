@@ -73,10 +73,16 @@ def DownLoadFromBoard(Board, page_size, filename):
     links = getPage_link(Board, page_size)
     page_links = list()
     
-    for link in links:
-        page_links += getSinglePage_link(link)
+    with open('LinkOf'+filename, 'w') as f:
+        for link in links:
+            l = getSinglePage_link(link)
+            for i in l:
+                f.write(i+'\n')
+                f.flush()
+            page_links += l
 
-    with open(filename, 'r') as f:
+
+    with open(filename, 'w') as f:
         for link in page_links:
             print(link)
             try:
