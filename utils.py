@@ -99,6 +99,10 @@ def DownLoadFromListOFLink(linkfile, docfile):
     doc_fp.close()
     link_fp.close()
 
+def String2File(s, filename):
+    with open(filename, 'w') as f:
+        f.write(s)
+
 if __name__ == "__main__":
     DownLoadFromListOFLink('LinkOfdata.txt', 'data.txt')
             
